@@ -25,8 +25,10 @@ resource "libvirt_domain" "domain" {
   cloudinit = libvirt_cloudinit_disk.cloudinit.id
 
   network_interface {
-    network_id   = local.network.id
-    network_name = local.network.name
+    network_id     = local.network.id
+    network_name   = local.network.name
+    mac            = local.network.mac
+    wait_for_lease = true
   }
 
   console {

@@ -1,4 +1,5 @@
 resource "random_pet" "instance" {}
+resource "macaddress" "mac" {}
 
 locals {
   volume = defaults(var.volume, {
@@ -9,6 +10,8 @@ locals {
 
   network = defaults(var.network, {
     id   = ""
+    name = ""
+    mac  = mac.address
   })
 
   cloudinit = defaults(var.cloudinit, {
