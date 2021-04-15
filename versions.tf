@@ -6,7 +6,9 @@ terraform {
       source  = "dmacvicar/libvirt"
       version = "~>0.6.3"
     }
+    macaddress = {
+      source = "ivoronin/macaddress"
+      version = "~>0.2.2"
   }
 }
-
 
