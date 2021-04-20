@@ -1,10 +1,12 @@
 version: 2
 ethernets:
-  ${nic}:
+  ${interface_name}:
     dhcp4: no
-    addresses: ["${ip_address}/24"]
-    gateway4: ${ip_gateway}
+    gateway4: ${gateway}
+    addresses:
+      - ${addresses}
     nameservers:
       addresses:
-      - ${ip_nameserver}
-      - 8.8.8.8
+        - ${ns1}
+        - ${ns2}
+        - ${ns3}

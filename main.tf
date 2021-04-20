@@ -2,14 +2,14 @@ resource "libvirt_volume" "volume" {
   name   = "${local.volume.name}.${local.volume.format}"
   source = local.volume.source
   format = local.volume.format
-  pool   = var.pool.name
+  pool   = local.volume.pool
 }
 
 resource "libvirt_cloudinit_disk" "cloudinit" {
   name           = "${local.cloudinit.name}-cloudinit.iso"
   user_data      = data.template_file.user_data.rendered
   network_config = data.template_file.network_config.rendered
-  pool           = var.pool.name
+  pool           = local.volume.pool
 }
 
 resource "libvirt_domain" "domain" {
@@ -26,9 +26,9 @@ resource "libvirt_domain" "domain" {
 
   network_interface {
     network_id     = local.network.id
-    network_name   = local.network.name
+    network_name   = var.network.name
     mac            = local.network.mac
-    wait_for_lease = true
+    wait_for_lease = false
   }
 
   console {

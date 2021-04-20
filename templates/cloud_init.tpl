@@ -83,6 +83,8 @@ users:
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
     groups: users, wheel
     shell: /bin/bash
+    ssh-authorized-keys:
+      - ${user_ssh_pub_key}
 #     lock_passwd: false
 #     passwd: $6$J.GyJJBeV05c7FkF$Y2poMCgFMT.kgQpkMaraj70idTEOSlZJKXApUs9eoYnANJB.s326Co6C3s7qhVevOXtMDOAuQ3TX2TjORAQSi. #"pass"
 #     ssh_import_id:

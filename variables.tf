@@ -1,15 +1,8 @@
-variable "pool" {
-  description = "Libvirt pool"
-  type        = object({
-    name      = string
-  })
-}
-
 variable "volume" {
   description = "Libvirt domain volume"
   type        = object({
     name      = optional(string)
-    pool      = string
+    pool      = optional(string)
     source    = optional(string)
     format    = optional(string)
   })
@@ -17,17 +10,26 @@ variable "volume" {
 
 variable "cloudinit" {
   description = "Cloudinit image"
-  type        = object({
-    name      = optional(string)
+  type             = object({
+    name           = optional(string)
+    interface_name = optional(string)
+    addresses      = optional(string)
+    gateway        = optional(string)
+    nameservers    = optional(object({
+      ns1 = optional(string)
+      ns2 = optional(string)
+      ns3 = optional(string)
+    }))
   })
 }
 
 variable "vm" {
   type = object({
-    user            = optional(string)
-    hostname        = optional(string)
-    domain          = optional(string)
-    time_zone       = optional(string)
+    user             = optional(string)
+    user_ssh_pub_key = optional(string)
+    hostname         = optional(string)
+    domain           = optional(string)
+    time_zone        = optional(string)
   })
 }
 
@@ -52,5 +54,6 @@ variable "network" {
   type = object({
     id   = optional(string)
     name = string
+    mac  = optional(string)
   })
 }
