@@ -11,14 +11,16 @@ locals {
   })
 
   network = defaults(var.network, {
-    id   = random_uuid.instance.id
-    mac  = macaddress.mac.address
+    id             = random_uuid.instance.id
+    mac            = macaddress.mac.address
+    wait_for_lease = false
   })
 
   cloudinit = defaults(var.cloudinit, {
     name           = random_pet.instance.id
+    dhcp           = true
     interface_name = "eth0"
-    addresses      = "192.168.67.254/24"
+    addresses      = "192.168.67.253/24"
     gateway        = "192.168.67.1"
     nameservers    = {
       ns1 = "1.1.1.1"

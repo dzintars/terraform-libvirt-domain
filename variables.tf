@@ -12,6 +12,7 @@ variable "cloudinit" {
   description = "Cloudinit image"
   type             = object({
     name           = optional(string)
+    dhcp           = optional(bool)
     interface_name = optional(string)
     addresses      = optional(string)
     gateway        = optional(string)
@@ -21,6 +22,18 @@ variable "cloudinit" {
       ns3 = optional(string)
     }))
   })
+  # default = {
+  #   name           = ""
+  #   dhcp           = false
+  #   interface_name = ""
+  #   addresses      = ""
+  #   gateway        = ""
+  #   nameservers    = {
+  #     ns1 = ""
+  #     ns2 = ""
+  #     ns3 = ""
+  #   }
+  # }
 }
 
 variable "vm" {
@@ -55,5 +68,6 @@ variable "network" {
     id   = optional(string)
     name = string
     mac  = optional(string)
+    wait_for_lease = optional(bool)
   })
 }

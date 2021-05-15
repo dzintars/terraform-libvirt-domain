@@ -1,12 +1,16 @@
 version: 2
 ethernets:
   ${interface_name}:
-    dhcp4: no
-    gateway4: ${gateway}
+    %{ if dhcp == "true" }
+    dhcp4: true
+    mac: ${mac}
+    %{ else }
     addresses:
       - ${addresses}
+    gateway4: ${gateway}
     nameservers:
       addresses:
-        - ${ns1}
-        - ${ns2}
-        - ${ns3}
+      - ${ns1}
+      - ${ns2}
+      - ${ns3}
+    %{ endif }

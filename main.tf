@@ -28,7 +28,7 @@ resource "libvirt_domain" "domain" {
     network_id     = local.network.id
     network_name   = var.network.name
     mac            = local.network.mac
-    wait_for_lease = false
+    wait_for_lease = local.network.wait_for_lease
   }
 
   console {

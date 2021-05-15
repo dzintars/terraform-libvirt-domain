@@ -15,11 +15,13 @@ data "template_file" "user_data" {
 data "template_file" "network_config" {
   template = file("${path.module}/templates/network_config_static.tpl")
   vars = {
+    mac            = local.network.mac
+    dhcp           = local.cloudinit.dhcp
     interface_name = local.cloudinit.interface_name
-    addresses = local.cloudinit.addresses
-    gateway   = local.cloudinit.gateway
-    ns1 = local.cloudinit.nameservers.ns1
-    ns2 = local.cloudinit.nameservers.ns2
-    ns3 = local.cloudinit.nameservers.ns3
+    addresses      = local.cloudinit.addresses
+    gateway        = local.cloudinit.gateway
+    ns1            = local.cloudinit.nameservers.ns1
+    ns2            = local.cloudinit.nameservers.ns2
+    ns3            = local.cloudinit.nameservers.ns3
   }
 }
