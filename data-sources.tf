@@ -13,7 +13,7 @@ data "template_file" "user_data" {
 }
 
 data "template_file" "network_config" {
-  template = file("${path.module}/templates/network_config_static.tpl")
+  template = file("${path.module}/templates/network_config.tpl")
   vars = {
     mac            = local.network.mac
     dhcp           = local.cloudinit.dhcp

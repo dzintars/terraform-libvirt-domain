@@ -20,8 +20,8 @@ locals {
     name           = random_pet.instance.id
     dhcp           = true
     interface_name = "eth0"
-    addresses      = "192.168.67.253/24"
-    gateway        = "192.168.67.1"
+    addresses      = null
+    gateway        = null
     nameservers    = {
       ns1 = "1.1.1.1"
       ns2 = "8.8.8.8"
