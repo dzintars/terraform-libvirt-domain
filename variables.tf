@@ -14,7 +14,7 @@ variable "cloudinit" {
     name           = optional(string)
     dhcp           = optional(bool)
     interface_name = optional(string)
-    addresses      = string
+    addresses      = list(string)
     gateway        = string
     nameservers    = optional(object({
       ns1 = optional(string)
