@@ -21,8 +21,5 @@ data "template_file" "network_config" {
     addresses      = jsonencode(var.addresses)
     gateway        = var.gateway
     nameservers    = jsonencode(var.nameservers)
-    ns1            = local.cloudinit.nameservers.ns1
-    ns2            = local.cloudinit.nameservers.ns2
-    ns3            = local.cloudinit.nameservers.ns3
   }
 }

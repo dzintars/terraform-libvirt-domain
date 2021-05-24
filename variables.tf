@@ -1,26 +1,19 @@
 variable "volume" {
   description = "Libvirt domain volume"
-  type        = object({
-    name      = optional(string)
-    pool      = optional(string)
-    source    = optional(string)
-    format    = optional(string)
+  type = object({
+    name   = optional(string)
+    pool   = optional(string)
+    source = optional(string)
+    format = optional(string)
   })
 }
 
 variable "cloudinit" {
   description = "Cloudinit image"
-  type             = object({
+  type = object({
     name           = optional(string)
     dhcp           = optional(bool)
     interface_name = optional(string)
-    addresses      = list(string)
-    gateway        = string
-    nameservers    = optional(object({
-      ns1 = optional(string)
-      ns2 = optional(string)
-      ns3 = optional(string)
-    }))
   })
   # default = {
   #   name           = ""
@@ -65,9 +58,24 @@ variable "domain" {
 
 variable "network" {
   type = object({
-    id   = optional(string)
-    name = string
-    mac  = optional(string)
+    id             = optional(string)
+    name           = string
+    mac            = optional(string)
     wait_for_lease = optional(bool)
   })
+}
+
+variable "addresses" {
+  type    = list(string)
+  default = []
+}
+
+variable "gateway" {
+  type    = string
+  default = ""
+}
+
+variable "nameservers" {
+  type    = list(string)
+  default = []
 }

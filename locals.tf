@@ -4,10 +4,10 @@ resource "macaddress" "mac" {}
 
 locals {
   volume = defaults(var.volume, {
-    name    = random_pet.instance.id
-    source  = "https://download.fedoraproject.org/pub/fedora/linux/releases/33/Cloud/x86_64/images/Fedora-Cloud-Base-33-1.2.x86_64.qcow2"
-    format  = "qcow2"
-    pool    = "/var/lib/libvirt/pools"
+    name   = random_pet.instance.id
+    source = "https://download.fedoraproject.org/pub/fedora/linux/releases/33/Cloud/x86_64/images/Fedora-Cloud-Base-33-1.2.x86_64.qcow2"
+    format = "qcow2"
+    pool   = "/var/lib/libvirt/pools"
   })
 
   network = defaults(var.network, {
@@ -20,13 +20,6 @@ locals {
     name           = random_pet.instance.id
     dhcp           = true
     interface_name = "eth0"
-    addresses      = null
-    gateway        = null
-    nameservers    = {
-      ns1 = "1.1.1.1"
-      ns2 = "8.8.8.8"
-      ns3 = "9.9.9.9"
-    }
   })
 
   vm = defaults(var.vm, {
