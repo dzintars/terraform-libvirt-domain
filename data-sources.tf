@@ -18,10 +18,8 @@ data "template_file" "network_config" {
     mac            = local.network.mac
     dhcp           = local.cloudinit.dhcp
     interface_name = local.cloudinit.interface_name
-    addresses      = local.cloudinit.addresses
-    gateway        = local.cloudinit.gateway
-    ns1            = local.cloudinit.nameservers.ns1
-    ns2            = local.cloudinit.nameservers.ns2
-    ns3            = local.cloudinit.nameservers.ns3
+    addresses      = jsonencode(var.addresses)
+    gateway        = var.gateway
+    nameservers    = jsonencode(var.nameservers)
   }
 }
