@@ -6,7 +6,7 @@ data "template_file" "user_data" {
     hostname         = local.vm.hostname
     domain           = local.vm.domain
     time_zone        = local.vm.time_zone
-    vault_addr       = var.vault.address
+    vault_address    = var.vault.address
     vault_role_id    = var.vault.role_id
     vault_secret_id  = var.vault.secret_id
   }

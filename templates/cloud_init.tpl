@@ -1,6 +1,5 @@
 #cloud-config
 
-# TODO: cluster name and fqdn IMO should come from Vault's KV store
 fqdn: ${hostname}.${domain}
 hostname: ${hostname}
 
@@ -19,7 +18,7 @@ write_files:
       echo "Authenticating with Vault"
       curl -sS \
         -X POST \
-        -d @- "${vault_addr}/v1/auth/approle/login" <<-EOF | jq -r '.auth.client_token' > $token_path
+        -d @- "${vault_address}/v1/auth/approle/login" <<-EOF | jq -r '.auth.client_token' > $token_path
       {
         "role_id": "${vault_role_id}",
         "secret_id": "${vault_secret_id}"
@@ -30,7 +29,7 @@ write_files:
       curl -sS \
         -H "X-Vault-Token: $(cat $token_path)" \
         -X POST \
-        -d @- "${vault_addr}/v1/ssh-host-signer/sign/hostrole" <<-EOF | jq -r .data.signed_key > $ssh_cert_path
+        -d @- "${vault_address}/v1/ssh-host-signer/sign/hostrole" <<-EOF | jq -r .data.signed_key > $ssh_cert_path
       {
         "public_key": "$(cat $ssh_pub_key_path)",
         "cert_type": "host"
@@ -69,7 +68,7 @@ runcmd:
   - [ systemctl, daemon-reload ]
   - [ systemctl, enable, qemu-guest-agent ]
   - [ systemctl, start, qemu-guest-agent ]
-  - [ curl, -o, /etc/ssh/trusted-user-ca-keys.pem, "https://vault.oswee.com/v1/ssh-client-signer/public_key" ]
+  - [ curl, -o, /etc/ssh/trusted-user-ca-keys.pem, "${vault_address}/v1/ssh-client-signer/public_key" ]
   - [ chmod, 0600, /etc/ssh/trusted-user-ca-keys.pem ]
   - [ sed, -i, -e, "$aTrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem", /etc/ssh/sshd_config ]
   - [ systemctl, enable, sign-host-certificate.timer ]
