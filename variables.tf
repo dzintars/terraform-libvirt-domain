@@ -79,3 +79,9 @@ variable "nameservers" {
   type    = list(string)
   default = []
 }
+
+variable "provider_libvirt_uri" {
+  description = "Qemu server uri. Format - qemu+ssh://user@host:2222/system"
+  type    = string
+  default = "qemu:///system"
+}
