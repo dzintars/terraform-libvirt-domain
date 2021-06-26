@@ -12,4 +12,12 @@ This module provisions the new Libvirt virtual machine.
 It is tied to Vault secret managment engine and so most likely You should not
 use this module.
 
+[NOTE]
+====
+A sample note admonition.
+We can use gemoji icons in the Asciidoctor markup.
+We assign an icon name to the document
+attributes `tip-caption`, `note-caption` and `important-caption`.
+====
+
 TIP: This module is used in https://github.com/oswee/ignite[oswee/ignite] repository.
