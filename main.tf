@@ -5,12 +5,16 @@ resource "libvirt_volume" "volume" {
   pool   = local.volume.pool
 }
 
+# tag::tagname[]
+
 resource "libvirt_cloudinit_disk" "cloudinit" {
   name           = "${local.cloudinit.name}-cloudinit.iso"
   user_data      = data.template_file.user_data.rendered
   network_config = data.template_file.network_config.rendered
   pool           = local.volume.pool
 }
+
+# end::tagname[]
 
 resource "libvirt_domain" "domain" {
   name   = local.domain.name
