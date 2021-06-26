@@ -21,3 +21,15 @@ attributes `tip-caption`, `note-caption` and `important-caption`.
 ====
 
 TIP: This module is used in https://github.com/oswee/ignite[oswee/ignite] repository.
+
+[source]
+ ----
+\ifdef::env-github[] <1> (1)
+:imagesdir: https://gist.githubusercontent.com/path/to/gist/revision/dir/with/all/images
+endif::[]
+\ifndef::env-github[] <2>
+:imagesdir: ./
+endif::[]
+ ----
+<1> Use the `ifdef` to customize for online rendering (2)
+<2> Use the `ifndef` to customize for offline
